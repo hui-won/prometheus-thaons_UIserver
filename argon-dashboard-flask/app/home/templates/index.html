@@ -1,0 +1,1047 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+ <head>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+ </head>
+     <!-- Header -->
+<div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-5">
+              <h1 class="h1 text-white d-inline-block mb-0"> On-premise Cloud Unified Monitoring</h1>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <!--
+		<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Default</li>
+                </ol>
+		-->
+              </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right"  id="test">
+            <!--  <a href="#" class="btn btn-sm btn-neutral">New</a>
+              <a href="#" class="btn btn-sm btn-neutral">Filters</a>-->
+            </div>
+          </div>
+          <!-- Card stats -->
+          <div class="row" id="card">
+            <div class="col-xl-4 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row" id="card1">
+                    <div class="col">
+                      <h4 class="card-title text-uppercase text-muted mb-0">&nbsp;&nbsp;Daejeon Techno Park</h4>
+                        <span class="h2 font-weight-bold mb-0">
+                          {% for data in result_alerts %}
+                          {% if data[2]=='node-exporter_1:9100' %}
+                          {% if data[3]=='critical' %}
+                          <span class="col-auto">
+			
+                            <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                              <i class="ni ni-active-40"></i>
+                            </div>
+                          </span>
+                          {% elif data[3]=='warning' %}
+                          <span class="col-auto">
+                            <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                              <i class="ni ni-active-40"></i>
+                            </div>
+                          </span>
+                          {% endif %}
+                          {{ data[0] }} : {{ data[3] }}<br>
+                          {% endif %}
+                          {% endfor %}
+                        </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row" id="card2">
+                    <div class="col">
+                      <h4 class="card-title text-uppercase text-muted mb-0">&nbsp;&nbsp;On-prem cloud2</h4>
+                      <span class="h2 font-weight-bold mb-0">
+                      {% for data in result_alerts %}
+                      {% if data[2]=='node-exporter_2:9100' %}
+                      {% if data[3]=='critical' %}
+                      <span class="col-auto">
+                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-active-40"></i>
+                        </div>
+                      </span>
+                      {% elif data[3]=='warning' %}
+                      <span class="col-auto">
+                        <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="ni ni-active-40"></i>
+                        </div>
+                      </span>
+                      {% endif %}
+                      {{ data[0] }} : {{ data[3] }} <br>
+                    {% endif %}
+                    {% endfor %}
+                    </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row" id="card3">
+                    <div class="col">
+                      <h4 class="card-title text-uppercase text-muted mb-0">&nbsp;&nbsp;On-prem cloud3</h4>
+                      <span class="h2 font-weight-bold mb-0">
+                        {% for data in result_alerts %}
+                        {% if data[2]=='node-exporter_3:9100' %}
+                        {% if data[3]=='critical' %}
+                        <span class="col-auto">
+                          <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                          <i class="ni ni-active-40"></i>
+                          </div>
+                        </span>
+                        {% elif data[3]=='warning' %}
+                        <span class="col-auto">
+                          <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                          <i class="ni ni-active-40"></i>
+                          </div>
+                        </span>
+                        {% endif %}
+                        {{ data[0] }} : {{ data[3] }}<br>
+                        {% endif %}
+                        {% endfor %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      
+      <!--Usage Progress -->
+      <div class="row">
+        <!--CPU Usage-->
+	<div>&nbsp;&nbsp;</div>
+        <div class="col-xl-4.1">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">CPU Usage</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+            <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">SERVER NAME</th>
+                    <th scope="col">USAGE RATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Daejeon TechnoPark
+                    </th>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="cpuuse0">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="cpubar0" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud2
+                    </th>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="cpuuse1">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="cpubar1" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"  style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud3
+                    </th>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="cpuuse2">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="cpubar2" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+	<div>&nbsp;&nbsp;&nbsp;</div>
+	<div></div>
+	<div></div>
+        <!-- Memory Usage -->
+        <div class="col-xl-4.6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Memory Usage</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+            <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">SERVER NAME</th>
+                    <th scope="col">USE / TOTAL</th>
+                    <th scope="col">USAGE RATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Daejeon TechnoPark
+                    </th>
+                    <td scope="row">
+                      <div id="memcheck0">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="memuse0">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="membar0" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud2
+                    </th>
+                    <td scope="row">
+                      <div id="memcheck1">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="memuse1">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="membar1" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud3
+                    </th>
+                    <td scope="row">
+                      <div id="memcheck2">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="memuse2">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="membar2" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+	<div>&nbsp;&nbsp;&nbsp;</div>
+	<div></div>
+	<div></div>
+        <!-- Disk Usage -->
+        <div class="col-xl-4.1">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Disk Usage</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+            <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">SERVER NAME</th>
+                    <th scope="col">USE / TOTAL</th>
+                    <th scope="col">USAGE RATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Daejeon TechnoPark
+                    </th>
+                    <td scope="row">
+                      <div id="diskcheck0">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="diskuse0">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="diskbar0" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud2
+                    </th>
+                    <td scope="row">
+                      <div id="diskcheck1">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="diskuse1">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="diskbar1" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      On-prem cloud3
+                    </th>
+                    <td scope="row">
+                      <div id="diskcheck2">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2" id="diskuse2">
+                        </span>
+                        <div>
+                          <div class="progress">
+                            <div id="diskbar2" class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <!--Network In/Out Chart -->
+      <div class="row">
+        <!-- Network In Chart -->
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <h3 class="mb-0 text-white">&nbsp;&nbsp;Network In Speed</h3>
+              <!-- Chart -->
+              <div class="chart">
+                <canvas id="network_in" width="630px" height="310px"></canvas>
+              </div>
+          </div>
+        </div>
+
+        <!-- Network Out Chart -->
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <h3 class="mb-0 text-white ">&nbsp;&nbsp;Network Out Speed</h3>
+              <div class="chart">
+                <canvas id="network_out" width="630px" height="310px"></canvas>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disk Read/Write Speed Chart -->
+      <div class="row">
+        <!-- Disk Read Speed Chart -->
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <h3 class="mb-0 text-white ">&nbsp;&nbsp;Disk Read Speed</h3>
+            <div class="chart">
+              <canvas id="disk_read" width="630px" height="310px"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disk Write Speed Chart -->
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <h3 class="mb-0 text-white ">&nbsp;&nbsp;Disk Write Speed</h3>
+            <div class="chart">
+              <canvas id="disk_write" width="630px" height="310px"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Result Table-->
+<!--      <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Result</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+-->
+              <!-- Projects table -->
+<!--              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Metrics Name</th>
+                    <th scope="col">Target Server</th>
+                    <th scope="col">Metrics Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                    <td rowspan=3>
+                      Alert
+                    </td>
+                    <td> Daejeon Techno Park </td>
+                    <td>
+                      {% for data in result_alerts %}
+                      {% if data[2]=='node-exporter_1:9100' %}
+                        {{ data[0] }} : {{ data[3] }}
+                        <br>
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td>
+                      {% for data in result_alerts %}
+                      {% if data[2]=='node-exporter_2:9100' %}
+                        {{ data[0] }} : {{ data[3] }}
+                        <br>
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td>
+                      {% for data in result_alerts %}
+                      {% if data[2]=='node-exporter_3:9100' %}
+                        {{ data[0] }} : {{ data[3] }}
+                        <br>:
+                      {% endif %}
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Memory Usage
+                    </td>
+                    <td> Daejeon Techno Park </td>
+                    <td id="result_mem0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_mem1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td id="result_mem2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Network In Data
+                    </td>
+                    <td> DJ Techno ParkDJ Techno Parknbsp;DJ Techno Parknbsp; </td>
+                    <td id="result_net_in0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_net_in1">
+                    </td>
+                    </tr>
+                    <td>On-prem cloud3 </td>
+                    <td id="result_net_in2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Network Out Data
+                    </td>
+                    <td> DJ Techno ParkDJ Techno Parknbsp;DJ Techno Parknbsp; </td>
+                    <td id="result_net_out0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_net_out1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td id="result_net_out2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Disk Usage
+                    </td>
+                    <td> Daejeon Techno Park </td>
+                    <td id="result_disk0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_disk1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td id="result_disk2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Disk Read Speed
+                    </td>
+                    <td> DJ Techno ParkDJ Techno Parknbsp;DJ Techno Parknbsp; </td>
+                    <td id="result_disk_read0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_disk_read1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3</td>
+                    <td id="result_disk_read2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      Disk Write Speed
+                    </td>
+                    <td> DJ Techno ParkDJ Techno Parknbsp;DJ Techno Parknbsp; </td>
+                    <td id="result_disk_write0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_disk_write1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td id="result_disk_write2">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan=3>
+                      CPU Usage
+                    </td>
+                    <td> DJ Techno ParkDJ Techno Parknbsp;DJ Techno Parknbsp; </td>
+                    <td id="result_cpu0">
+                    </td>
+                    <tr>
+                    <td> On-prem cloud2 </td>
+                    <td id="result_cpu1">
+                    </td>
+                    </tr>
+                    <td> On-prem cloud3 </td>
+                    <td id="result_cpu2">
+                    </td>
+                  </tr>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div> --> 
+	{% include "includes/footer.html" %}
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+  <script>
+    function card_re(){
+      $("#card1").load(window.location.href + " #card1");
+      $("#card2").load(window.location.href + " #card2");
+      $("#card3").load(window.location.href + " #card3");
+    }
+    setInterval('card_re()',1000);
+  </script>
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0/dist/chartjs-adapter-luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0/dist/chartjs-plugin-streaming.min.js"></script>
+
+  <script>
+    setInterval(function(){$.ajax({
+      url: '/update',
+      type: 'POST',
+      success: function(response){
+        //console.log(response);
+
+        $("#result_mem0").html(response["result_mem0"]).append(' %');
+        $("#result_mem1").html(response["result_mem1"]).append(' %');
+        $("#result_mem2").html(response["result_mem2"]).append(' %');
+        $("#result_net_in0").html(response["result_net_in0"]).append(' MB/s');
+        $("#result_net_in1").html(response["result_net_in1"]).append(' MB/s');
+        $("#result_net_in2").html(response["result_net_in2"]).append(' MB/s');
+        $("#result_net_out0").html(response["result_net_out0"]).append(' MB/s');
+        $("#result_net_out1").html(response["result_net_out1"]).append(' MB/s');
+        $("#result_net_out2").html(response["result_net_out2"]).append(' MB/s');
+        $("#result_disk0").html(response["result_disk0"]).append(' %');
+        $("#result_disk1").html(response["result_disk1"]).append(' %');
+        $("#result_disk2").html(response["result_disk2"]).append(' %');
+
+        $("#result_disk_read0").html(response["result_disk_read0"]).append(' MB/s');
+        $("#result_disk_read1").html(response["result_disk_read1"]).append(' MB/s');
+        $("#result_disk_read2").html(response["result_disk_read2"]).append(' MB/s');
+        $("#result_disk_write0").html(response["result_disk_write0"]).append(' MB/s');
+        $("#result_disk_write1").html(response["result_disk_write1"]).append(' MB/s');
+        $("#result_disk_write2").html(response["result_disk_write2"]).append(' MB/s');
+        $("#result_cpu0").html(response["result_cpu0"]).append(' %');
+        $("#result_cpu1").html(response["result_cpu1"]).append(' %');
+        $("#result_cpu2").html(response["result_cpu2"]).append(' %');
+        $("#result_alerts").html(response["result_alerts"]);
+
+        var $memuse0 = response["result_mem0"]+'% ';
+        var $memuse1 = response["result_mem1"]+'% ';
+        var $memuse2 = response["result_mem2"]+'% ';
+        document.getElementById("memuse0").innerHTML=$memuse0;
+        document.getElementById("memuse1").innerHTML=$memuse1;
+        document.getElementById("memuse2").innerHTML=$memuse2;
+
+        var $memcheck0 = response["result_mem_use0"]+'G/'+response["result_mem_total0"]+'G';
+        var $memcheck1 = response["result_mem_use1"]+'G/'+response["result_mem_total1"]+'G';
+        var $memcheck2 = response["result_mem_use2"]+'G/'+response["result_mem_total2"]+'G';
+        document.getElementById("memcheck0").innerHTML=$memcheck0;
+        document.getElementById("memcheck1").innerHTML=$memcheck1;
+        document.getElementById("memcheck2").innerHTML=$memcheck2;
+
+        var $diskuse0 = response["result_disk0"]+'% ';
+        var $diskuse1 = response["result_disk1"]+'% ';
+        var $diskuse2 = response["result_disk2"]+'% ';
+        document.getElementById("diskuse0").innerHTML=$diskuse0;
+        document.getElementById("diskuse1").innerHTML=$diskuse1;
+        document.getElementById("diskuse2").innerHTML=$diskuse2;
+
+        var $diskcheck0 = response["result_disk_use0"]+'G/'+response["result_disk_total0"]+'G';
+        var $diskcheck1 = response["result_disk_use1"]+'G/'+response["result_disk_total1"]+'G';
+        var $diskcheck2 = response["result_disk_use2"]+'G/'+response["result_disk_total2"]+'G';
+        document.getElementById("diskcheck0").innerHTML=$diskcheck0;
+        document.getElementById("diskcheck1").innerHTML=$diskcheck1;
+        document.getElementById("diskcheck2").innerHTML=$diskcheck2;
+
+        var $diskuse0 = response["result_disk0"]+'% ';
+        var $diskuse1 = response["result_disk1"]+'% ';
+        var $diskuse2 = response["result_disk2"]+'% ';
+        document.getElementById("diskuse0").innerHTML=$diskuse0;
+        document.getElementById("diskuse1").innerHTML=$diskuse1;
+        document.getElementById("diskuse2").innerHTML=$diskuse2;
+
+        var $cpuuse0 = response["result_cpu0"]+'% ';
+        var $cpuuse1 = response["result_cpu1"]+'% ';
+        var $cpuuse2 = response["result_cpu2"]+'% ';
+        document.getElementById("cpuuse0").innerHTML=$cpuuse0;
+        document.getElementById("cpuuse1").innerHTML=$cpuuse1;
+        document.getElementById("cpuuse2").innerHTML=$cpuuse2;
+
+        document.getElementById("cpubar0").style='width: '+$cpuuse0+';';
+        document.getElementById("cpubar1").style='width: '+$cpuuse1+';';
+        document.getElementById("cpubar2").style='width: '+$cpuuse2+';';
+
+        document.getElementById("membar0").style='width: '+$memuse0+';';
+        document.getElementById("membar1").style='width: '+$memuse1+';';
+        document.getElementById("membar2").style='width: '+$memuse2+';';
+
+        document.getElementById("diskbar0").style='width: '+$diskuse0+';';
+        document.getElementById("diskbar1").style='width: '+$diskuse1+';';
+        document.getElementById("diskbar2").style='width: '+$diskuse2+';';
+
+        //Chart
+
+        var $network_in = document.getElementById('network_in').getContext('2d');
+        var $network_out = document.getElementById('network_out').getContext('2d');
+        var $disk_read = document.getElementById('disk_read').getContext('2d');
+        var $disk_write = document.getElementById('disk_write').getContext('2d');
+
+        $net_in0=response["result_net_in0"]*1024;
+        $net_in1=response["result_net_in1"]*1024;
+        $net_in2=response["result_net_in2"]*1024;
+
+        $net_out0=response["result_net_out0"]*1024;
+        $net_out1=response["result_net_out1"]*1024;
+        $net_out2=response["result_net_out2"]*1024;
+
+        $disk_read0=response["result_disk_read0"];
+        $disk_read1=response["result_disk_read1"];
+        $disk_read2=response["result_disk_read2"];
+
+        $disk_write0=response["result_disk_write0"];
+        $disk_write1=response["result_disk_write1"];
+        $disk_write2=response["result_disk_write2"];
+
+        var network_in_chart = new Chart($network_in,{
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                label: 'Olympic Stadium site',
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'KTX site',
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'Sports Complex site',
+                backgroundColor: 'rgba(247, 231, 126, 1)',
+                borderColor: 'rgba(247, 231, 126, 1)',
+                fill: false,
+                data: []
+              }
+            ]
+          },
+          options: {
+            plugins:{
+              streaming:{
+                duration: 30000
+              }
+            },
+            interaction:{
+              intersect: false
+            },
+            scales: {
+              x: {
+                type: 'realtime',
+                realtime: {
+                  delay: 1000,
+                  onRefresh: chart => {
+                    chart.data.datasets[0].data.push({
+                        x: Date.now(),
+                        y: [$net_in0]
+                      });
+
+                    chart.data.datasets[1].data.push({
+                        x: Date.now(),
+                        y: [$net_in1]
+                      });
+
+                    chart.data.datasets[2].data.push({
+                        x: Date.now(),
+                        y: [$net_in2]
+                      });
+
+                  }
+                }
+              },
+              y: {
+                title:{
+                  display: true,
+                  text: '(kB/s)',
+                  color: 'white'
+                }
+              }
+            }
+          }
+        });
+
+        console.log("3: "+$net_in0)
+        var network_out_chart = new Chart($network_out,{
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                label: 'Olympic Stadium site',
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'KTX site',
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'Sports Complex site',
+                backgroundColor: 'rgba(247, 231, 126, 1)',
+                borderColor: 'rgba(247, 231, 126, 1)',
+                fill: false,
+                data: []
+              }
+            ]
+          },
+          options: {
+            plugins:{
+              streaming:{
+                duration: 30000
+              }
+            },
+            interaction:{
+              intersect: false
+            },
+            scales: {
+              x: {
+                type: 'realtime',
+                realtime: {
+                  delay: 2000,
+                  onRefresh: chart => {
+                    chart.data.datasets[0].data.push({
+                        x: Date.now(),
+                        y: [$net_out0]
+                      });
+
+                    chart.data.datasets[1].data.push({
+                        x: Date.now(),
+                        y: [$net_out1]
+                      });
+                    chart.data.datasets[2].data.push({
+                        x: Date.now(),
+                        y: [$net_out2]
+                      });
+                  }
+                }
+              },
+              y: {
+                title:{
+                  display: true,
+                  text: '(kB/s)',
+                  color: 'white'
+                }
+              }
+            }
+          }
+
+        });
+
+        var disk_read_chart = new Chart($disk_read,{
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                label: 'Olympic Stadium site',
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'KTX site',
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'Sports Complex site',
+                backgroundColor: 'rgba(247, 231, 126, 1)',
+                borderColor: 'rgba(247, 231, 126, 1)',
+                fill: false,
+                data: []
+              }
+            ]
+          },
+          options: {
+            plugins:{
+              streaming:{
+                duration: 30000
+              }
+            },
+            interaction:{
+              intersect: false
+            },
+            scales: {
+              x: {
+                type: 'realtime',
+                realtime: {
+                  delay: 2000,
+                  onRefresh: chart => {
+
+                    chart.data.datasets[0].data.push({
+                        x: Date.now(),
+                        y: [$disk_read0]
+                      });
+                    chart.data.datasets[1].data.push({
+                        x: Date.now(),
+                        y: [$disk_read1]
+                      });
+                    chart.data.datasets[2].data.push({
+                        x: Date.now(),
+                        y: [$disk_read2]
+                      });
+                  }
+                }
+              },
+              y: {
+                title:{
+                  display: true,
+                  text: '(MB/s)',
+                  color: 'white'
+                }
+              }
+            }
+          }
+
+        });
+
+        var disk_write_chart = new Chart($disk_write,{
+          type: 'line',
+          data: {
+            datasets: [
+              {
+                label: 'Olympic Stadium site',
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'KTX site',
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                fill: false,
+                data: []
+              },
+              {
+                label: 'Sports Complex site',
+                backgroundColor: 'rgba(247, 231, 126, 1)',
+                borderColor: 'rgba(247, 231, 126, 1)',
+                fill: false,
+                data: []
+              }
+            ]
+          },
+          options: {
+            plugins:{
+              streaming:{
+                duration: 30000
+              }
+            },
+            interaction:{
+              intersect: false
+            },
+            scales: {
+              x: {
+                type: 'realtime',
+                realtime: {
+                  delay: 2000,
+                  onRefresh: chart => {
+
+                    chart.data.datasets[0].data.push({
+                        x: Date.now(),
+                        y: [$disk_write0]
+                      });
+                    chart.data.datasets[1].data.push({
+                        x: Date.now(),
+                        y: [$disk_write1]
+                      });
+                    chart.data.datasets[2].data.push({
+                        x: Date.now(),
+                        y: [$disk_write2]
+                      });
+                  }
+                }
+              },
+              y: {
+                title:{
+                  display: true,
+                  text: '(MB/s)',
+                  color: 'white'
+                }
+              }
+            }
+          }
+
+        });
+
+            },
+            error: function(error){
+              console.log(error);
+            }
+          })}, 1000);
+
+  </script>
+{% endblock javascripts %}
+
+
